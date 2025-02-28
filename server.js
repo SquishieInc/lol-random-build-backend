@@ -9,7 +9,12 @@ app.use(express.json());
 const RIOT_CDN = "https://ddragon.leagueoflegends.com/cdn/14.5.1";
 const RIOT_API_URL = `${RIOT_CDN}/data/en_US`;
 
-// Set timeout to 60 seconds (default is 15s on Render)
+// Default Route to Fix "Cannot GET /"
+app.get("/", (req, res) => {
+    res.send("League of Legends Random Build API is running! Use /random-build to get a build.");
+});
+
+// Set timeout to 60 seconds (prevents Render timeouts)
 app.use((req, res, next) => {
     req.setTimeout(60000, () => {
         console.log("Request timed out.");
@@ -18,6 +23,7 @@ app.use((req, res, next) => {
     next();
 });
 
+// Function to Fetch and Generate a Random Build
 async function getRandomBuild(req, res) {
     try {
         const championData = await axios.get(`${RIOT_API_URL}/champion.json`);
@@ -73,11 +79,9 @@ async function getRandomBuild(req, res) {
     }
 }
 
-// API Endpoint
+// API Endpoint for Random Build
 app.get("/random-build", getRandomBuild);
 
 // Ensure the correct port is used on Render
 const PORT = process.env.PORT || 3000;
-app.get("/", (req, res) => {
-    res.send("League of Legends Random Build API is running! Use /random-build to get a build.");
 app.listen(PORT, "0.0.0.0", () => console.log(`Server running on port ${PORT}`));
