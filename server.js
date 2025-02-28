@@ -78,4 +78,6 @@ app.get("/random-build", getRandomBuild);
 
 // Ensure the correct port is used on Render
 const PORT = process.env.PORT || 3000;
+app.get("/", (req, res) => {
+    res.send("League of Legends Random Build API is running! Use /random-build to get a build.");
 app.listen(PORT, "0.0.0.0", () => console.log(`Server running on port ${PORT}`));
