@@ -1,0 +1,17 @@
+{
+  "name": "lol-random-build",
+  "version": "1.0.0",
+  "description": "League of Legends Random Build Generator API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.2.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "fs-extra": "^10.1.0",
+    "path": "^0.12.7",
+    "puppeteer": "^24.3.0"
+  }
+}
